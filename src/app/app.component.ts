@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './files/navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './files/footer/footer.component';
+// import { AppRoutingModule } from './app.routes';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet ,NavbarComponent, FontAwesomeModule, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

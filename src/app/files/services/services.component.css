@@ -1,0 +1,7 @@
+
+.fort{
+    background-image: linear-gradient(to left, rgba(12, 12, 12, 0.7),rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/gif.gif);
+     
+      height: 50vh;
+      width: 100%;
+  }

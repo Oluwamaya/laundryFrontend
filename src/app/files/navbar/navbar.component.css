@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.goat{
+    color: rgb(18,78,125);
+}
+.active-link {
+    color: green !important;
+    font-weight: bold !important;
+  }
+.chec{
+    color: rgb(18,78,125);
+    font-weight: 600;
+    display: flex;
+    margin: 0 10px;
+    align-items: center;
+}
+.bot{
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: 1s;
+
+}
+.bot:hover{
+    background-color: white;
+    border: 1px solid green !important;
+    color: green;
+}
+nav{
+    padding: 10px 30px;
+    background-color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 2px 2px 2px 1px gray !important;
+    margin: 10px 0;
+
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 4;
+
+}
+.hot{
+    font-size: 18px;
+}
+.hot:hover{
+    color: green !important;
+}
+.hot:focus-within{
+    color: green !important;
+}
+.glo{
+    padding: 20px;
+    margin: 20px;
+}

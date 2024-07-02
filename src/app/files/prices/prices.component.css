@@ -1,0 +1,60 @@
+*{
+    margin: 0 ;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.fort{
+  background-image: linear-gradient(to left, rgba(12, 12, 12, 0.7),rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/gif.gif);
+   
+    height: 50vh;
+    width: 100%;
+}
+.mam{
+    padding-top:80px ;
+}
+.flo{
+    /* color: rgb(18,78,125); */
+    color: rgb(18,78,125);
+    font-size: 30px;
+    font-weight: 600;
+    padding: 15px 0;
+}
+
+.fat {
+    width: 24%;
+    border-radius: 10px;
+    padding: 15px 30px;
+    background-color: rgb(245, 245, 245);
+    color: rgb(18, 78, 125);
+    font-weight: 600;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+
+  .fat:not(.active-focus):hover {
+    background-color: white;
+    color: rgb(43, 153, 50);
+  }
+  
+  .active-focus {
+    background-color: rgb(43, 153, 50);
+    color: white;
+  }
+  .kent{
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+  .kent:hover{
+    box-shadow: 1px 1px 30px 0 gray !important;
+    border: none;
+  }
+
+  @media (max-width:1000px) {
+    .fat{
+        width: 90% !important;
+        margin: 5px 0 ;
+        
+    }
+  }

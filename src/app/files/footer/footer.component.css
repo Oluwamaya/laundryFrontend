@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.font{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 23px 0;
+    text-align: center;
+    margin: auto;
+    
+    z-index: 1;
+}
+.fog {
+    position: fixed;
+    bottom: 5px;
+    right: 30px;
+    font-size: 50px;
+  }
+  
+  .bom {
+    position: relative;
+  }
+  
+  .kot {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 80px;
+    
+    color: white;
+    padding: 6px 8px;
+    
+     border-radius: 20px;
+     transition: 3s !important;
+  }
+  
+  .bom a:hover + .kot {
+    display: block;
+  }
+  
