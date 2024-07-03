@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAward, faCartShopping, faFaceSmileBeam, faHandSparkles, faLeaf, faLightbulb, faPercent, faRocket, faSmileBeam, faTimesCircle, faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
 // import { faUser } from "@fortawesome/free-regular-svg-icons";
@@ -7,7 +8,7 @@ import { faAward, faCartShopping, faFaceSmileBeam, faHandSparkles, faLeaf, faLig
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule ,CommonModule ],
+  imports: [FontAwesomeModule ,CommonModule, RouterModule ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
