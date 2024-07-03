@@ -1,0 +1,44 @@
+.body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+  
+  .payment-details {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .payment-details p {
+    margin-bottom: 10px;
+  }
+  
+  .payment-details .title {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .preview-image {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .bom{
+    height: 20% !important;
+    width: 100%;
+  }
+  
+  .confirm-checkbox {
+    margin-top: 20px;
+  }
+  
+  .submit-btn {
+    margin-top: 20px;
+  }
+  

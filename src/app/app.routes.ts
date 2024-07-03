@@ -14,6 +14,7 @@ import { DashboardComponent } from './files/dashboard/dashboard.component';
 import { LoginComponent } from './files/login/login.component';
 import { OrderRequestComponent } from './files/order-request/order-request.component';
 import { PaymentComponent } from './files/payment/payment.component';
+import { InvoiceComponent } from './files/invoice/invoice.component';
 
 export const routes: Routes = [
     {
@@ -40,6 +41,7 @@ export const routes: Routes = [
             {path: "login", component:LoginComponent},
             {path:"order", component: OrderRequestComponent },
             {path: "payment", component: PaymentComponent},
+            {path: "invoice" , component: InvoiceComponent}
             
         ]
     }

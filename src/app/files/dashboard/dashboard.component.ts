@@ -101,7 +101,7 @@ export class DashboardComponent {
   
  // dashboard.component.ts
 choosePlan(planAmount: number, planName: string) {
-  this.router.navigate(['/payment'], { queryParams: { amount: planAmount, plan: planName } });
+  this.router.navigate(['/invoice'], { queryParams: { amount: planAmount, plan: planName } });
 }
 
 }
