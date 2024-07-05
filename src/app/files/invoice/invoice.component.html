@@ -9,15 +9,15 @@
 </head>
 <body>
   <section class="container-fluid">
-      <main class="flex justify-center items-center">
-          <div class="col-4 text-center bg-white shadow-lg fw-bold ">
+      <main class="flex justify-center items-center my-4">
+          <div class="col-12 col-md-6 text-center bg-white shadow-lg fw-bold ">
               <h4 class="text-green-600">Payment Details</h4>
               <p>Plan : {{ plan }}</p>
               <p>Amount : <span><fa-icon [icon]="faNaira"></fa-icon>{{ amount }}</span></p>
               <p>Duration : 1 Month</p>
 
               <p class="fs-6 fw-bold">Payment Method : <span >Bank Tansfer</span></p>
-               <button class="btn btn-outline-success my-2">Proceed for Payment</button>
+               <button routerLink="/payment" class="btn btn-outline-success my-2">Proceed for Payment</button>
 
             </div>
       </main>

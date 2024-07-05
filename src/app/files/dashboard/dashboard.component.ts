@@ -24,8 +24,8 @@ interface UserInfo {
 })
 export class DashboardComponent {
   
-  public userInfo: UserInfo | null = null; 
-  public token: string | null = localStorage.getItem('lUserToken');
+  public userInfo: UserInfo | null = null;
+  public token: any | null = JSON.parse(localStorage.getItem('lUserToken')!);
   public greeting : any = ''
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -56,7 +56,7 @@ export class DashboardComponent {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
       this.greeting = 'Good Morning';
-    } else if (currentHour < 18) {
+    } else if (currentHour < 16) {
       this.greeting = 'Good Afternoon';
     } else {
       this.greeting = 'Good Evening';
@@ -66,16 +66,16 @@ export class DashboardComponent {
     if (!this.token) {
       console.error("Token is missing.");
       alert("Token expired, please log in again to continue.");
-      this.router.navigate(["/patient-login"]);
+      this.router.navigate(["/login"]);
       return;
     }
-
+     const token = this.token.value
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
+      'Authorization': `Bearer ${token}`
     });
 
-    this.http.post<any>("http://localhost/laundryBackend/Dashboard/dashboard.php", {}, { headers }).subscribe(
+    this.http.post<any>("https://laundry.eaaafrica.org/Dashboard/dashboard.php", {}, { headers }).subscribe(
       (response) => {
         if (response.status) {
           console.log("User information:", response);
@@ -86,7 +86,7 @@ export class DashboardComponent {
         } else {
           console.error("Failed to fetch user information:", response.message);
           alert("Token expired, please log in again to continue.");
-          this.router.navigate(["/patient-login"]);
+          this.router.navigate(["/login"]);
         }
       },
       (error) => {

@@ -9,12 +9,15 @@
 <body>
     <section class="container-fluid">
        <main>
-        <div class="container mt-5">
+        <div class=" mt-5">
             <div class="payment-details">
               <p class="title text-center">Bank Payment Information</p>
               <p><strong>Bank Name:</strong> FCMB</p>
               <p><strong>Account Name:</strong> ADIGUN JONATHAN</p>
-              <p><strong>Account No:</strong> 3486271015</p><hr>
+              <p><strong>Account No:</strong> 3486271015</p>
+              <p><strong>Amount :</strong><fa-icon [icon]="faNaira"></fa-icon> {{paymentDetails.amount}}</p>
+              <p><strong>Plan :</strong>{{paymentDetails.plan}}</p><hr>
+              
 
               <p>Please review the payment details carefully before proceeding with the transaction. Thank you.</p><hr>
           

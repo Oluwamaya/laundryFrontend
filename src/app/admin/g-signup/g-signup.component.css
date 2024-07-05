@@ -1,0 +1,22 @@
+*{
+    padding: 0;
+    margin: 0;
+    /* background-color: rgba(128, 128, 128, 0.635); */
+}
+.flush{
+    margin: 40px 0;
+   box-shadow: 1px 1px 1px 1px blue;
+    padding: 20px 10px;
+}
+.got{
+    text-shadow: 2px 2px 2px  black;
+    text-align: center;
+    color: blue;
+}
+.bot{
+    padding: 12px 40px;
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+}

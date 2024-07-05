@@ -19,14 +19,16 @@ export class PaymentComponent {
   previewImage: string | ArrayBuffer | null = null;
   confirmed: boolean = false;
   public userInfo: any | null = null; // Use 'any' or define an interface for userInfo
-
+  public paymentDetails : any = {}
   faNaira = faNairaSign;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+
     this.userInfo = JSON.parse(localStorage.getItem("allInfo")!);
-    console.log(this.userInfo);
+    this.paymentDetails = JSON.parse(localStorage.getItem("paymentDetails")!)
+    console.log(this.userInfo , this.paymentDetails);
   }
 
   onFileSelected(event: any) {
@@ -52,7 +54,10 @@ export class PaymentComponent {
     formData.append('file', this.previewImage as string); // Assuming 'previewImage' is a string
 
     // Append other form data
-    formData.append('userId', this.userInfo.id); // Adjust as per your userInfo structure
+    formData.append('userId', this.userInfo.id);
+    formData.append('plan', this.paymentDetails.plan)
+    formData.append('amount', this.paymentDetails.amount)
+    formData.append("paymentStatus", "pending" )
 
     // Example: Send formData to backend
     this.http.post<any>('http://localhost:3000/upload', formData).subscribe(

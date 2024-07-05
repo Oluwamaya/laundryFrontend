@@ -17,52 +17,67 @@
                     <p class="title">Sign Up</p>
                     <!-- <p class="text-muted fw-bolder ">Get started absolutely freely </p> -->
                     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="form">
-                        <div>
-                          <input formControlName="firstName" type="text" class="input" placeholder="First Name">
-                          <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="error">
-                            <small class="text-danger" *ngIf="f['firstName'].errors?.['required']">First Name is required.</small>
-                            <small class="text-danger" *ngIf="f['firstName'].errors?.['minlength']">First Name must be at least 2 characters.</small>
-                          </div>
+                      <div>
+                        <input formControlName="firstName" type="text" class="input" placeholder="First Name">
+                        <div *ngIf="f['firstName'].touched && f['firstName'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['firstName'].errors?.['required']">First Name is required.</small>
+                          <small class="text-danger" *ngIf="f['firstName'].errors?.['minlength']">First Name must be at least 2 characters.</small>
                         </div>
-                      
-                        <div>
-                          <input formControlName="lastName" type="text" class="input" placeholder="Last Name">
-                          <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="error">
-                            <small class="text-danger" *ngIf="f['lastName'].errors?.['required']">Last Name is required.</small>
-                            <small class="text-danger" *ngIf="f['lastName'].errors?.['minlength']">Last Name must be at least 2 characters.</small>
-                          </div>
+                      </div>
+                    
+                      <div>
+                        <input formControlName="lastName" type="text" class="input" placeholder="Last Name">
+                        <div *ngIf="f['lastName'].touched && f['lastName'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['lastName'].errors?.['required']">Last Name is required.</small>
+                          <small class="text-danger" *ngIf="f['lastName'].errors?.['minlength']">Last Name must be at least 2 characters.</small>
                         </div>
-                      
-                        <div>
-                          <input formControlName="number" type="text" class="input" placeholder="Number">
-                          <div *ngIf="f['number'].touched && f['number'].invalid" class="error">
-                            <small class="text-danger" *ngIf="f['number'].errors?.['required']">Number is required.</small>
-                            <small class="text-danger" *ngIf="f['number'].errors?.['pattern']">Number must be numeric.</small>
-                          </div>
+                      </div>
+                    
+                      <div>
+                        <input formControlName="number" type="text" class="input" placeholder="Number">
+                        <div *ngIf="f['number'].touched && f['number'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['number'].errors?.['required']">Number is required.</small>
+                          <small class="text-danger" *ngIf="f['number'].errors?.['pattern']">Number must be numeric.</small>
                         </div>
-                      
-                        <div>
-                          <input formControlName="email" type="email" class="input" placeholder="Email">
-                          <div *ngIf="f['email'].touched && f['email'].invalid" class="error">
-                            <small class="text-danger" *ngIf="f['email'].errors?.['required']">Email is required.</small>
-                            <small class="text-danger" *ngIf="f['email'].errors?.['email']">Email must be valid.</small>
-                          </div>
+                      </div>
+                    
+                      <div>
+                        <input formControlName="email" type="email" class="input" placeholder="Email">
+                        <div *ngIf="f['email'].touched && f['email'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['email'].errors?.['required']">Email is required.</small>
+                          <small class="text-danger" *ngIf="f['email'].errors?.['email']">Email must be valid.</small>
                         </div>
-                      
-                        <div>
-                          <input formControlName="password" type="password" class="input" placeholder="Password">
-                          <div *ngIf="f['password'].touched && f['password'].invalid" class="error">
-                            <small class="text-danger" *ngIf="f['password'].errors?.['required']">Password is required.</small>
-                            <small class="text-danger" *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters.</small>
-                          </div>
+                      </div>
+                    
+                      <div>
+                        <select formControlName="adminLocation" class="input ">
+                          <option class="fs-6 text-danger" value="" disabled> nearest pickup to your location</option>
+                          <option value="Iwo Road">Iwo Road</option>
+                          <option value="Challenge">Challenge</option>
+                          <option value="Sango">Sango</option>
+                          <option value="Ring Road">Ring Road</option>
+                          <option value="Elebu">Elebu</option>
+                        </select>
+                        <div *ngIf="f['adminLocation'].touched && f['adminLocation'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['adminLocation'].errors?.['required']">Location is required.</small>
                         </div>
-                      
-                        <p class="page-link">
-                          <span class="page-link-label">Forgot Password?</span>
-                        </p>
-                      
-                        <button type="submit" class="form-btn fw-bold">Sign Up</button>
-                      </form>
+                      </div>
+                    
+                      <div>
+                        <input formControlName="password" type="password" class="input" placeholder="Password">
+                        <div *ngIf="f['password'].touched && f['password'].invalid" class="error">
+                          <small class="text-danger" *ngIf="f['password'].errors?.['required']">Password is required.</small>
+                          <small class="text-danger" *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters.</small>
+                        </div>
+                      </div>
+                    
+                      <p class="page-link">
+                        <span class="page-link-label">Forgot Password?</span>
+                      </p>
+                    
+                      <button type="submit" class="form-btn fw-bold">Sign Up</button>
+                    </form>
+                    
                       
                      
                       

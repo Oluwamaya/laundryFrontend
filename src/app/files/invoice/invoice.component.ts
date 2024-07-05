@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faNairaSign } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-invoice',
   standalone: true,
-  imports: [FontAwesomeModule,CommonModule],
+  imports: [FontAwesomeModule,CommonModule, RouterModule],
   templateUrl: './invoice.component.html',
   styleUrl: './invoice.component.css'
 })
@@ -27,6 +27,12 @@ export class InvoiceComponent {
       this.plan = params['plan'];
       console.log('Amount received:', this.amount);
       console.log('Plan received:', this.plan);
+
+      const value  = {
+        amount : this.amount,
+        plan : this.plan
+      }
+      localStorage.setItem('paymentDetails', JSON.stringify(value));
     });
   }
 }

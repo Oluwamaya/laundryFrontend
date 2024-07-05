@@ -15,6 +15,9 @@ import { LoginComponent } from './files/login/login.component';
 import { OrderRequestComponent } from './files/order-request/order-request.component';
 import { PaymentComponent } from './files/payment/payment.component';
 import { InvoiceComponent } from './files/invoice/invoice.component';
+import { GSignupComponent } from './admin/g-signup/g-signup.component';
+import { GLoginComponent } from './admin/g-login/g-login.component';
+import { GDashboardComponent } from './admin/g-dashboard/g-dashboard.component';
 
 export const routes: Routes = [
     {
@@ -41,7 +44,11 @@ export const routes: Routes = [
             {path: "login", component:LoginComponent},
             {path:"order", component: OrderRequestComponent },
             {path: "payment", component: PaymentComponent},
-            {path: "invoice" , component: InvoiceComponent}
+            {path: "invoice" , component: InvoiceComponent},
+            {path : "sooAsignup" , component: GSignupComponent},
+            {path : "sooAlogin", component: GLoginComponent},
+            {path : "adminDashboard", component: GDashboardComponent}
+
             
         ]
     }

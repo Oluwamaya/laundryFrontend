@@ -19,6 +19,7 @@ export class SignupComponent {
     lastName: ['', [Validators.required, Validators.minLength(2)]],
     number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     email: ['', [Validators.required, Validators.email]],
+    adminLocation: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 }
@@ -38,9 +39,10 @@ onSubmit() {
       formData.append('number', this.signUpForm.get('number')?.value);
       formData.append('email', this.signUpForm.get('email')?.value);
       formData.append('password', this.signUpForm.get('password')?.value);
+      formData.append('adminLocation', this.signUpForm.get('adminLocation')?.value);
     
     console.log(formData);
-    this.http.post<any>("http://localhost/laundryBackend/authentication/usersignup.php",formData).subscribe((res)=>{
+    this.http.post<any>("https://laundry.eaaafrica.org/Authentication/usersignup.php",formData).subscribe((res)=>{
       console.log(res);
       alert(res.message)
       if (res.status == true) {

@@ -32,11 +32,12 @@ export class LoginComponent {
       formData.append('email', this.loginForm.get('email')?.value);
       formData.append('password', this.loginForm.get('password')?.value);
 
-      this.http.post<any>("http://localhost/laundryBackend/authentication/userlogin.php", formData).subscribe(res => {
+      this.http.post<any>("https://laundry.eaaafrica.org/Authentication/userLogin.php", formData).subscribe(res => {
         console.log(res);
         if (res.status == true) {
           alert('Welcome'+ " " + res.user.lastName)
-          localStorage.setItem("lUserToken", res.token)
+          this.setTokenWithExpiry("lUserToken", res.token, 2);
+          // localStorage.setItem("lUserToken", res.token)
           this.loginForm.reset();
           this.router.navigate(['/Dashboard']); 
         }else{
@@ -50,6 +51,16 @@ export class LoginComponent {
     } else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  setTokenWithExpiry(key: string, value: string, hours: number) {
+    const now = new Date();
+    const expiry = now.getTime() + hours * 60 * 60 * 1000; // Calculate expiry time in milliseconds
+    const item = {
+      value: value,
+      expiry: expiry
+    };
+    localStorage.setItem(key, JSON.stringify(item));
   }
 
 }
