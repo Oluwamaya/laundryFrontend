@@ -12,65 +12,155 @@
            <p class="text-light"><span>{{greeting}}</span>  <span class="text-light fw-bold"> Admin {{adminInfo.username}}</span></p>
         
         </div>
-        <main class="block md:flex justify-center items-center  w-100  text-light">
-            <div class="fet mx-1 bg-blue-600  text-light p-4">
-                <p>0 Payment Request</p>
-                 
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
-
+        <main class="block md:flex justify-center items-center w-100 text-light">
+            <div  class="fet mx-1 bg-blue-600 text-light p-4">
+              
+              <p>{{totalPending}} Pending Payment</p>
+              
+              <div routerLink="/paymentRequest" class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border">
+                <p >View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-            <main *ngIf="childpayment" class="text-dark">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores dolorib us assumenda culpa quibusdam, esse ratione odio itaque expedita nemo natus tempora libero rem voluptates, sapiente quod, ducimus eos eveniet perspiciatis!</p>
-
-            </main>
-            <div class="fet mx-1 bg-gray-600  text-light p-4">
-                <p>2 Registered Users</p>
-                 
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
-
+          
+            <div *ngIf="allUserInfo" class="fet mx-1 bg-gray-600 text-light p-4">
+              <p>{{ allUserInfo.length }} Registered Users</p>
+              <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border" (click)="toggleChildPayment(1)">
+                <p>View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-            <div class="fet mx-1 bg-info  text-light p-4">
-                <p>0 New Request</p>
-                 
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
-
+          
+            <div class="fet mx-1 bg-info text-light p-4">
+              <p>0 New Request</p>
+              <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border" (click)="toggleChildPayment(2)">
+                <p>View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-           
+          
             <div class="fet mx-1 bg-green-600 p-4">
-                <p>0 Accept!</p>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
+              <p>0 Accept!</p>
+              <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border" (click)="toggleChildPayment(3)">
+                <p>View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-            <div class="fet mx-1 bg-yellow-600 p-4 ">
-                <p>0 process!</p>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
+          
+            <div class="fet mx-1 bg-yellow-600 p-4">
+              <p>0 process!</p>
+              <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border" (click)="toggleChildPayment(4)">
+                <p>View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-            <div class="fet mx-1 bg-red-600 p-4 ">
-                <p>2 Finish!</p>
-
-                <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border ">
-                    <p>View Details</p>
-                    <p><fa-icon [icon]="faBar"></fa-icon></p>
-                </div>
+          
+            <div class="fet mx-1 bg-red-600 p-4">
+              <p>2 Finish!</p>
+              <div class="d-flex justify-content-between align-items-center mt-4 btn btn-outline-light fw-bold border" (click)="toggleChildPayment(5)">
+                <p>View Details</p>
+                <p><fa-icon [icon]="faBar"></fa-icon></p>
+              </div>
             </div>
-           
-        </main>
+          </main>
+          
+          <section>
+            <div *ngIf="childpayment[0]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              <main class="text-dark">
+
+                <main>
+                  <main class="user-info">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>userId</th>
+                          <th>Plan</th>
+                          <th>Amount </th>
+                          <th>Status</th>
+                          <th>Receipt</th>
+                         
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr  *ngFor="let el of paymentInfo; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ el.userId }}</td>
+                          <td>{{ el.plan }}</td>
+                          <td>{{ el.amount }}</td>
+                          <td>{{ el.paymentStatus }}</td>
+                          <td  class="">
+                            <a class="text-decoration-none btn btn-outline-success" href="{{el.receipt}}" target="_blank">View Receipt</a>
+                        </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </main>
+                </main>
+              </main>
+            </div>
+          
+            <div *ngIf="childpayment[1]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              
+            <main class="user-info">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Lastname</th>
+                      <th>Email</th>
+                      <th>Phone No</th>
+                      <th>Address</th>
+                      <th>Pickup Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let el of allUserInfo; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ el.lastname }}</td>
+                      <td>{{ el.email }}</td>
+                      <td>{{ el.phoneNo }}</td>
+                      <td>{{ el.address }}</td>
+                      <td>{{el.adminAddress}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </main>
+              
+            </div>
+          
+            <div *ngIf="childpayment[2]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              <main class="text-dark">
+                <p>New Request sit amet consectetur adipisicing elit. Dolores doloribus assumenda culpa quibusdam...</p>
+              </main>
+            </div>
+          
+            <div *ngIf="childpayment[3]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              <main class="text-dark">
+                <p>Accept, sit amet consectetur adipisicing elit. Dolores doloribus assumenda culpa quibusdam...</p>
+              </main>
+            </div>
+          
+            <div *ngIf="childpayment[4]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              <main class="text-dark">
+                <p>Process, sit amet consectetur adipisicing elit. Dolores doloribus assumenda culpa quibusdam...</p>
+              </main>
+            </div>
+          
+            <div *ngIf="childpayment[5]" class="fullscreen">
+              <button (click)="hideChildPayment()" class="back-button">Back</button>
+              <main class="text-dark">
+                <p>Finish, sit amet consectetur adipisicing elit. Dolores doloribus assumenda culpa quibusdam...</p>
+              </main>
+            </div>
+          </section>
+          
+          
     </section>
 </body>
 </html>

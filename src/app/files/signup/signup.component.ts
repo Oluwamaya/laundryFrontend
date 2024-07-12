@@ -42,7 +42,7 @@ onSubmit() {
       formData.append('adminLocation', this.signUpForm.get('adminLocation')?.value);
     
     console.log(formData);
-    this.http.post<any>("https://laundry.eaaafrica.org/Authentication/usersignup.php",formData).subscribe((res)=>{
+    this.http.post<any>("http://localhost/laundryBackend/authentication/usersignup.php",formData).subscribe((res)=>{
       console.log(res);
       alert(res.message)
       if (res.status == true) {

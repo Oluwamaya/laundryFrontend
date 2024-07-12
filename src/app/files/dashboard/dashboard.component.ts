@@ -49,9 +49,17 @@ export class DashboardComponent {
 
   ngOnInit() {
     console.log(this.token);
+
+
     this.getUserInfo();
     this.setGreeting()
   }
+
+   veifyToken(){
+    // if (!this.token || Date.now() > this.tok) {
+      
+    // }
+   }
   setGreeting() {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
@@ -63,7 +71,7 @@ export class DashboardComponent {
     }
   }
   getUserInfo() {
-    if (!this.token) {
+    if (!this.token ) {
       console.error("Token is missing.");
       alert("Token expired, please log in again to continue.");
       this.router.navigate(["/login"]);

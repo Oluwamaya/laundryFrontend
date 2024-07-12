@@ -50,7 +50,7 @@ export class GLoginComponent {
   // Method to set token with expiry
   setTokenWithExpiry(key: string, value: string, hours: number) {
     const now = new Date();
-    const expiry = now.getTime() + hours * 60 * 60 * 1000; // Calculate expiry time in milliseconds
+    const expiry = Date.now() + 5 * 60 * 1000; // Calculate expiry time in milliseconds
     const item = {
       value: value,
       expiry: expiry

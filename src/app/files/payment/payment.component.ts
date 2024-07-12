@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faNairaSign } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
@@ -16,58 +16,76 @@ import { faNairaSign } from '@fortawesome/free-solid-svg-icons';
 export class PaymentComponent {
   public amount: number | undefined;
   public plan: string | undefined;
-  previewImage: string | ArrayBuffer | null = null;
   confirmed: boolean = false;
-  public userInfo: any | null = null; // Use 'any' or define an interface for userInfo
-  public paymentDetails : any = {}
+  public userInfo: any | null = null;
+  public paymentDetails: any = {};
   faNaira = faNairaSign;
+  public previewImage: any | null; // To store base64 encoded image for preview
+  public selectedFile: File | undefined;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-
     this.userInfo = JSON.parse(localStorage.getItem("allInfo")!);
-    this.paymentDetails = JSON.parse(localStorage.getItem("paymentDetails")!)
-    console.log(this.userInfo , this.paymentDetails);
+    this.paymentDetails = JSON.parse(localStorage.getItem("paymentDetails")!);
+    console.log(this.userInfo, this.paymentDetails);
   }
-
+ 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0];
+    const files: File = event.target.files[0];
+    console.log(files);
+    this.selectedFile = files
     const reader = new FileReader();
 
     reader.onload = () => {
-      this.previewImage = reader.result;
+        this.previewImage = reader.result as string;
     };
 
-    reader.readAsDataURL(file);
-  }
+    reader.readAsDataURL(this.selectedFile);
+}
+
+   
+  
+  
+
+ 
+ 
 
   submitPayment() {
-    // Logic to submit payment
-    if (!this.previewImage) {
+    console.log();
+    
+    if (!this.selectedFile) {
       alert('Please upload the payment receipt before submitting.');
       return;
     }
-
-    // Create FormData object
-    const formData = new FormData();
-    formData.append('file', this.previewImage as string); // Assuming 'previewImage' is a string
-
+    const formData = new FormData()
+    formData.append('file', this.selectedFile); 
     // Append other form data
     formData.append('userId', this.userInfo.id);
-    formData.append('plan', this.paymentDetails.plan)
-    formData.append('amount', this.paymentDetails.amount)
-    formData.append("paymentStatus", "pending" )
+    formData.append('plan', this.paymentDetails.plan);
+    formData.append('amount', this.paymentDetails.amount);
+    formData.append('email', this.userInfo.email);
+    formData.append('paymentStatus', 'pending');
 
-    // Example: Send formData to backend
-    this.http.post<any>('http://localhost:3000/upload', formData).subscribe(
+    // Send formData to backend
+    this.http.post<any>('http://localhost/laundryBackend/Dashboard/payment.php', formData).subscribe(
       (response) => {
         console.log('Payment submitted successfully:', response);
-        // Handle response as needed
+        if (response.status == true ) {
+          alert("Payment submitted. Please wait for the agent to verify your payment.");
+          this.router.navigate(['/dashboard'])
+          // this.previewImage.reset()
+        }else{
+          alert(response.message)
+          
+        }
       },
       (error) => {
         console.error('Error submitting payment:', error);
-        // Handle error
       }
     );
   }

@@ -24,7 +24,7 @@
                         </div>
                       
                         <input type="password" class="input" formControlName="password" placeholder="Password">
-                        <div *ngIf="f['password'].touched && f['password'].invalid">
+                        <div *ngIf="f['password'].touched && f['password'].invalid" >
                           <small class="text-danger" *ngIf="f['password'].errors?.['required']">Password is required</small>
                          
                         </div>

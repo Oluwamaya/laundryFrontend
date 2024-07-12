@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -8,26 +8,42 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-g-dashboard',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule ,FontAwesomeModule],
+  imports: [CommonModule, HttpClientModule, RouterModule, FontAwesomeModule],
   templateUrl: './g-dashboard.component.html',
   styleUrls: ['./g-dashboard.component.css']
 })
-export class GDashboardComponent {
+export class GDashboardComponent implements OnInit {
   public adminInfo: any = null;
-  public token: any | null = JSON.parse(localStorage.getItem('lAdminToken')!);
-  public childpayment : any = false
-   
-  faBar = faBars
-  
-  public greeting : string = '';
-
+  public token: any | null = null;
+  public childpayment: boolean[] = [false, false, false, false, false, false];
+  public allUserInfo: any[] = [];
+  faBar = faBars;
+  public greeting: string = '';
+  public paymentInfo  : any [] = []
+  totalPayments: number = 0;
+  totalAccepted: number = 0;
+  totalRejected: number = 0;
+  totalPending: number = 0;
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    console.log(this.token.value);
-    
+    this.token = this.getToken();
+    if (!this.token) {
+      alert("Token expired, please log in again to continue.");
+      this.router.navigate(["/sooAlogin"]);
+      return;
+    }
     this.getUserInfo();
     this.setGreeting();
+    this.getAllUserInfo();
+  }
+
+  toggleChildPayment(index: number): void {
+    this.childpayment = this.childpayment.map((_, i) => i === index);
+  }
+
+  hideChildPayment(): void {
+    this.childpayment = this.childpayment.map(() => false);
   }
 
   setGreeting() {
@@ -41,30 +57,38 @@ export class GDashboardComponent {
     }
   }
 
+  getToken(): any | null {
+    const tokenData = JSON.parse(localStorage.getItem('lAdminToken')!);
+    if (!tokenData || Date.now() > tokenData.expiry) {
+      this.removeToken();
+      return null;
+    }
+    return tokenData.value;
+  }
+
+  removeToken() {
+    localStorage.removeItem('lAdminToken');
+  }
+
   getUserInfo() {
     if (!this.token) {
       console.error("Token is missing.");
       alert("Token expired, please log in again to continue.");
-      this.router.navigate(["/patient-login"]);
+      this.router.navigate(["/sooAlogin"]);
       return;
     }
-   const token  = this.token.value
+    const token = this.token;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    console.log(token);
-    
+
     this.http.post<any>("https://laundry.eaaafrica.org/Admin/adashboard.php", {}, { headers }).subscribe(
       (response) => {
         console.log(response);
         
         if (response.status === true) {
-         
-          console.log("User information:", response);
           this.adminInfo = response.user;
-          console.log(this.adminInfo);
-          
           localStorage.setItem("adminInfo", JSON.stringify(this.adminInfo));
         } else {
           console.error("Failed to fetch user information:", response.message);
@@ -77,5 +101,25 @@ export class GDashboardComponent {
         alert("An error occurred while fetching user information.");
       }
     );
+  }
+
+  getAllUserInfo() {
+    this.http.post<any>("http://localhost/laundryBackend/admin/fetchAllUsers.php", {}).subscribe((res) => {
+      console.log(res);
+      
+      this.allUserInfo = res.users;
+      this.paymentInfo = res.payments
+      this.calculateTotals();
+
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+  calculateTotals() {
+    this.totalPayments = this.paymentInfo.length;
+    this.totalAccepted = this.paymentInfo.filter(payment => payment.paymentStatus === 'accepted').length;
+    this.totalRejected = this.paymentInfo.filter(payment => payment.paymentStatus === 'rejected').length;
+    this.totalPending = this.paymentInfo.filter(payment => payment.paymentStatus === 'pending').length;
   }
 }
