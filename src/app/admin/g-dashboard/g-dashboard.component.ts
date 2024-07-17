@@ -83,7 +83,7 @@ export class GDashboardComponent implements OnInit {
       'Authorization': `Bearer ${token}`
     });
 
-    this.http.post<any>("https://laundry.eaaafrica.org/Admin/adashboard.php", {}, { headers }).subscribe(
+    this.http.post<any>("http://localhost/laundryBackend/Admin/adashboard.php", {}, { headers }).subscribe(
       (response) => {
         console.log(response);
         
